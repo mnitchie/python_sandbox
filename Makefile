@@ -1,19 +1,32 @@
 .DEFAULT_GOAL := help
 
-.PHONY: 
-	build $\
-	help $\
-	_notImplemented $\
+.PHONY: build \
+        help \
+        start \
+        start_jupyter \
+        start_vanilla \
+        _notImplemented \
+        _start-%
 
-build: # build the docker image
-	docker build -t python_sandbox .
+# Build the docker images
+build:
+	docker build -t python_sandbox_vanilla --build-arg REQUIREMENTS_FILE=requirements_base.txt .
+	docker build -t python_sandbox_jupyter --build-arg REQUIREMENTS_FILE=requirements_jupyter.txt .
 
-help: ## show help
+# Show help
+help:
 	@echo "Usage: make [recipe]\n\nRecipes:"
 	@grep -h '##' $(MAKEFILE_LIST) | grep -v grep | sed -e 's/\(.*\):.*## \(.*\)/\1|    \2/' | tr '|' '\n'
 
-start: build## start the docker container
-	docker run -it --rm --name python_sandbox python_sandbox bash
+# Start the docker container
+_start-%: build
+	docker run -it --rm --name python_sandbox_$* python_sandbox_$* bash
 
+# Start vanilla docker container
+start: start_vanilla
+start_vanilla: _start-vanilla
+start_jupyter: _start-jupyter
+
+# Placeholder for not implemented targets
 _notImplemented:
 	@echo "This target is not yet implemented"
