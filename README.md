@@ -18,7 +18,7 @@ This repository provides a simple sandbox for Python development without requiri
 To use the `vanilla` image, you can run:
 
 ```bash
-docker run -it --rm -v $(pwd):/usr/src/app python_sandbox_vanilla python bash
+docker run -it --rm -v $(pwd):/usr/src/app python_sandbox_vanilla bash
 ```
 
 ### Jupyter Image
@@ -26,7 +26,7 @@ docker run -it --rm -v $(pwd):/usr/src/app python_sandbox_vanilla python bash
 To use the jupyter image, you can run:
 
 ```bash
-docker run -it --rm -p 8888:8888 python_sandbox_jupyter
+docker run -it --rm -v $(pwd):/usr/src/app -p 8888:8888 python_sandbox_jupyter bash
 ```
 
 ## Additional Options
