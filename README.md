@@ -34,8 +34,8 @@ docker run -it --rm -v $(pwd):/usr/src/app -p 8888:8888 python_sandbox_jupyter
 To have these commands easily available outside of this repo, create an alias
 
 ```
-echo "alias python-sandbox-vanilla='docker run -it --rm -v \$(pwd):/usr/src/app python_sandbox_vanilla python bash'" >> ~/.bashrc
-echo "alias python-sandbox-jupyter='docker run -it --rm -p 8888:8888 python_sandbox_jupyter'" >> ~/.bashrc
+echo "alias python-sandbox-vanilla='docker run -it --rm -v $(pwd):/usr/src/app python_sandbox_vanilla bash'" >> ~/.bashrc
+echo "alias python-sandbox-jupyter='docker run -it --rm -v $(pwd):/usr/src/app -p 8888:8888 python_sandbox_jupyter'" >> ~/.bashrc
 ```
 
 
