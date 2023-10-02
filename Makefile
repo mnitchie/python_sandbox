@@ -1,6 +1,7 @@
 .DEFAULT_GOAL := help
 
 .PHONY: build \
+		clean \
         help \
         start \
         start_jupyter \
@@ -11,6 +12,10 @@
 build:
 	docker build --target base-env -t python_sandbox_vanilla .
 	docker build --target jupyter-env -t python_sandbox_jupyter .
+
+clean:
+	@echo "Removing dangling Docker images..."
+	@docker rmi -f $$(docker images -f "dangling=true" -q)
 
 # Show help
 help:
