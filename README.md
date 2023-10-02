@@ -23,11 +23,22 @@ docker run -it --rm -v $(pwd):/usr/src/app python_sandbox_vanilla bash
 
 ### Jupyter Image
 
-To use the jupyter image, you can run:
+To use the jupyter image, you can run the following, which will automatically start a jupyter notebook server:
 
 ```bash
-docker run -it --rm -v $(pwd):/usr/src/app -p 8888:8888 python_sandbox_jupyter bash
+docker run -it --rm -v $(pwd):/usr/src/app -p 8888:8888 python_sandbox_jupyter
 ```
+
+## Aliases
+
+To have these commands easily available outside of this repo, create an alias
+
+```
+echo "alias python-sandbox-vanilla='docker run -it --rm -v \$(pwd):/usr/src/app python_sandbox_vanilla python bash'" >> ~/.bashrc
+echo "alias python-sandbox-jupyter='docker run -it --rm -p 8888:8888 python_sandbox_jupyter'" >> ~/.bashrc
+```
+
+
 
 ## Additional Options
 

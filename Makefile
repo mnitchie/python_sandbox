@@ -6,26 +6,23 @@
         start_jupyter \
         start_vanilla \
         _notImplemented \
-        _start-%
 
 # Build the docker images
 build:
-	docker build -t python_sandbox_vanilla -f Dockerfile.base .
-	docker build -t python_sandbox_jupyter -f Dockerfile.jupyter .
+	docker build --target base-env -t python_sandbox_vanilla .
+	docker build --target jupyter-env -t python_sandbox_jupyter .
 
 # Show help
 help:
 	@echo "Usage: make [recipe]\n\nRecipes:"
 	@grep -h '##' $(MAKEFILE_LIST) | grep -v grep | sed -e 's/\(.*\):.*## \(.*\)/\1|    \2/' | tr '|' '\n'
 
-# Start the docker container
-_start-%: build
-	docker run -it --rm --name python_sandbox_$* python_sandbox_$* bash
-
 # Start vanilla docker container
-start: start_vanilla
-start_vanilla: _start-vanilla
-start_jupyter: _start-jupyter
+start: build
+	docker run -it --rm -v $(shell pwd):/usr/src/app --name python_sandbox_vannilla python_sandbox_vanilla
+
+start_jupyter: build
+	docker run -it --rm -p 8888:8888 -v $(shell pwd):/usr/src/app --name python_sandbox_jupyter python_sandbox_jupyter
 
 # Placeholder for not implemented targets
 _notImplemented:
