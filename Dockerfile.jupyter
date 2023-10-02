@@ -1,0 +1,9 @@
+FROM python_sandbox_vanilla:latest
+
+COPY ${REQUIREMENTS_FILE} ./requirements.txt
+
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install --no-cache-dir -r requirements.txt
+
+echo "echo jupyter notebook --allow-root --ip=0.0.0.0
+" >> ~/.bashrc

@@ -10,8 +10,8 @@
 
 # Build the docker images
 build:
-	docker build -t python_sandbox_vanilla --build-arg REQUIREMENTS_FILE=requirements_base.txt .
-	docker build -t python_sandbox_jupyter --build-arg REQUIREMENTS_FILE=requirements_jupyter.txt .
+	docker build -t python_sandbox_vanilla -f Dockerfile.base .
+	docker build -t python_sandbox_jupyter -f Dockerfile.jupyter .
 
 # Show help
 help:
