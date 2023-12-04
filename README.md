@@ -47,5 +47,5 @@ For AWS operations, mount your AWS credentials directory by adding `-v ~/.aws:/r
 If you use aws-vault, run the container with the same credentials as your host machine:
 
 ```bash
-docker run --env-file <(aws-vault exec --json <profile> env --duration=8h) -it --rm -v $(pwd):/usr/src/app python_sandbox_vanilla python bash
+docker run --env-file <(aws-vault exec --json <profile> env --duration=8h | jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]') -it --rm -v $(pwd):/usr/src/app python_sandbox_vanilla bas
 ```
